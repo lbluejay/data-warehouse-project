@@ -1,0 +1,9 @@
+FROM python:3.11-slim
+
+# Install dependencies
+RUN pip install --no-cache-dir pandas google-cloud-bigquery pyarrow pandas-gbq
+
+WORKDIR /usr/app
+# We don't necessarily need to COPY everything because the volume maps it,
+# but it's good practice for the script to be there.
+COPY ingest.py .
