@@ -10,7 +10,7 @@ services:
     environment:
       - DBT_PROFILES_DIR=/usr/app
       - GOOGLE_APPLICATION_CREDENTIALS=/root/.google/credentials/gcp-credentials.json
-      - GCP_PROJECT=${GCP_PROJECT_ID}
+      - GCP_PROJECT_ID=${GCP_PROJECT_ID}
       - GCP_DATASET=${GCP_DATASET}
 
   cube:
