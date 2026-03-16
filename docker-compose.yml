@@ -36,4 +36,4 @@ services:
       env_file: .env
       environment:
         - GOOGLE_APPLICATION_CREDENTIALS=/root/.google/credentials/gcp-credentials.json
-      command: python ingest_data.py
+      command: python ingest.py
