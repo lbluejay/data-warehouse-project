@@ -14,17 +14,24 @@ services:
       - GCP_DATASET=${GCP_DATASET}
 
   cube:
-    image: cubejs/cube:latest
-    ports:
-      - "4000:4000"
-    env_file: .env
-    volumes:
-      - ./cube:/cube/conf
-      - ${GCP_PATH}:/root/.google/credentials/gcp-credentials.json
-    environment:
-      - CUBEJS_DB_TYPE=bigquery
-      - CUBEJS_DB_BQ_PROJECT_ID=${GCP_PROJECT_ID}
-      - CUBEJS_DB_BQ_KEY_FILE=/root/.google/credentials/gcp-credentials.json
+      image: cubejs/cube:latest
+      ports:
+        - "4000:4000"
+      env_file: .env
+      volumes:
+        # Map the WHOLE cube folder to a standard app path
+        - ./cube:/usr/app 
+        # Map the GCP key to a secure system path (consistent with your dbt setup)
+        - ${GCP_PATH}:/root/.google/credentials/gcp-credentials.json
+      environment:
+        - CUBEJS_DB_TYPE=bigquery
+        - CUBEJS_DB_BQ_PROJECT_ID=${GCP_PROJECT_ID}
+        # Update this to match the volume mapping above!
+        - CUBEJS_DB_BQ_KEY_FILE=/root/.google/credentials/gcp-credentials.json
+        - CUBEJS_DEV_MODE=true
+        - CUBEJS_API_SECRET=${CUBEJS_API_SECRET}
+        # Tell Cube to look for models in the mapped volume
+        - CUBEJS_CUBES_DIR=/usr/app/model
 
   ingest:
       build: 
