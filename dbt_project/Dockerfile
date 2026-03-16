@@ -1,3 +1,11 @@
 FROM python:3.11-slim
-RUN pip install dbt-bigquery
+
+# Install git and other system dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends git && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN pip install dbt-bigquery    
+
 WORKDIR /usr/app
