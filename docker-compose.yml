@@ -20,11 +20,11 @@ services:
     env_file: .env
     volumes:
       - ./cube:/cube/conf
-      - ${GCP_PATH}:/cube/google_creds.json
+      - ${GCP_PATH}:/root/.google/credentials/gcp-credentials.json
     environment:
       - CUBEJS_DB_TYPE=bigquery
       - CUBEJS_DB_BQ_PROJECT_ID=${GCP_PROJECT_ID}
-      - CUBEJS_DB_BQ_KEY_FILE=/cube/google_creds.json
+      - CUBEJS_DB_BQ_KEY_FILE=/root/.google/credentials/gcp-credentials.json
 
   ingest:
       build: 
@@ -32,8 +32,8 @@ services:
         dockerfile: Dockerfile.ingest
       volumes:
         - .:/usr/app
-        - ${GCP_PATH}:/usr/app/google_creds.json
+        - ${GCP_PATH}:/root/.google/credentials/gcp-credentials.json
       env_file: .env
       environment:
-        - GOOGLE_APPLICATION_CREDENTIALS=/usr/app/google_creds.json
+        - GOOGLE_APPLICATION_CREDENTIALS=/root/.google/credentials/gcp-credentials.json
       command: python ingest_data.py

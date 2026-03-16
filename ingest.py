@@ -2,6 +2,10 @@ import os
 import pandas as pd
 from google.cloud import bigquery
 
+#ensuring we are in the right directory
+os.chdir('/usr/app')
+data_path = "./data"
+
 # Initialize BigQuery client
 client = bigquery.Client()
 dataset_id = f"{os.getenv('GCP_PROJECT_ID')}.{os.getenv('GCP_DATASET')}"
