@@ -1,2 +1,5 @@
 .env
 .google/credentials
+.venv
+settings.py
+data/*.csv

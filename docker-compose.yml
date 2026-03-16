@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  dbt:
+    build: ./dbt_project
+    volumes:
+      - ./dbt_project:/usr/app
+      # Map the local path from .env to a standard path inside the container
+      - ${LOCAL_GOOGLE_KEY_PATH}:/usr/app/.google/gcp-credentials.json
+    environment:
+      - DBT_PROFILES_DIR=/usr/app
+      - GOOGLE_APPLICATION_CREDENTIALS=/usr/app/.google/gcp-credentials.json
+      - GCP_PROJECT=${GCP_PROJECT_ID}
+      - GCP_DATASET=${GCP_DATASET}
+
+  cube:
+    image: cubejs/cube:latest
+    ports:
+      - "4000:4000"
+    env_file: .env
+    volumes:
+      - ./cube:/cube/conf
+      - ${LOCAL_GOOGLE_KEY_PATH}:/cube/google_creds.json
+    environment:
+      - CUBEJS_DB_TYPE=bigquery
+      - CUBEJS_DB_BQ_PROJECT_ID=${GCP_PROJECT_ID}
+      - CUBEJS_DB_BQ_KEY_FILE=/cube/google_creds.json
