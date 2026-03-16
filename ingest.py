@@ -4,7 +4,7 @@ from google.cloud import bigquery
 
 #ensuring we are in the right directory
 os.chdir('/usr/app')
-data_path = "./data"
+data_path = "/data"
 
 # Initialize BigQuery client
 client = bigquery.Client()
