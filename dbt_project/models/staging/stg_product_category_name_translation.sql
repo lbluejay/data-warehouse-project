@@ -3,6 +3,6 @@ with raw_product_category_name_translation as (
 )
 
 select
-    NULLIF(trim(cast(product_category_name as varchar)), '') as product_category_name,
-    NULLIF(trim(cast(product_category_name_english as varchar)), '') as product_category_name_english
+    NULLIF(trim(cast(product_category_name as string)), '') as product_category_name,
+    NULLIF(trim(cast(product_category_name_english as string)), '') as product_category_name_english
 from raw_product_category_name_translation

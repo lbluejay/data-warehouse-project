@@ -3,13 +3,14 @@ with raw_products as (
 )
 
 select
-    NULLIF(trim(cast(product_id as varchar)), '') as product_id,
-    NULLIF(trim(cast(product_category_name as varchar)), '') as product_category_name,
-    cast(NULLIF(trim(cast(product_name_length as varchar)), '') as float) as product_name_length,
-    cast(NULLIF(trim(cast(product_description_length as varchar)), '') as float) as product_description_length,
-    cast(NULLIF(trim(cast(product_photos_qty as varchar)), '') as float) as product_photos_qty,
-    cast(NULLIF(trim(cast(product_weight_g as varchar)), '') as float) as product_weight_g,
-    cast(NULLIF(trim(cast(product_length_cm as varchar)), '') as float) as product_length_cm,
-    cast(NULLIF(trim(cast(product_height_cm as varchar)), '') as float) as product_height_cm,
-    cast(NULLIF(trim(cast(product_width_cm as varchar)), '') as float) as product_width_cm
+    nullif(trim(cast(product_id as string)), '') as product_id,
+    nullif(trim(cast(product_category_name as string)), '') as product_category_name,
+    cast(nullif(trim(cast(product_name_length as string)), '') as float64) as product_name_length,
+    cast(nullif(trim(cast(product_description_length as string)), '') as float64) as product_description_length,
+    cast(nullif(trim(cast(product_photos_qty as string)), '') as float64) as product_photos_qty,
+    cast(nullif(trim(cast(product_weight_g as string)), '') as float64) as product_weight_g,
+    cast(nullif(trim(cast(product_length_cm as string)), '') as float64) as product_length_cm,
+    cast(nullif(trim(cast(product_height_cm as string)), '') as float64) as product_height_cm,
+    cast(nullif(trim(cast(product_width_cm as string)), '') as float64) as product_width_cm
+
 from raw_products

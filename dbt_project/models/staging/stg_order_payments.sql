@@ -3,9 +3,10 @@ with raw_order_payments as (
 )
 
 select
-    NULLIF(trim(cast(order_id as varchar)), '') as order_id,
-    cast(NULLIF(trim(cast(payment_sequential as varchar)), '') as int) as payment_sequential,
-    NULLIF(trim(cast(payment_type as varchar)), '') as payment_type,
-    cast(NULLIF(trim(cast(payment_installments as varchar)), '') as int) as payment_installments,
-    cast(NULLIF(trim(cast(payment_value as varchar)), '') as float) as payment_value
+    nullif(trim(cast(order_id as string)), '') as order_id,
+    nullif(trim(cast(payment_type as string)), '') as payment_type,
+    cast(nullif(trim(cast(payment_sequential as string)), '') as int64) as payment_sequential,
+    cast(nullif(trim(cast(payment_installments as string)), '') as int64) as payment_installments,
+    cast(nullif(trim(cast(payment_value as string)), '') as float64) as payment_value
+
 from raw_order_payments

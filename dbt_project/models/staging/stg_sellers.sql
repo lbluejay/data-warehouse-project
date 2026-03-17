@@ -3,8 +3,9 @@ with raw_sellers as (
 )
 
 select
-    NULLIF(trim(cast(seller_id as varchar)), '') as seller_id,
-    cast(NULLIF(trim(cast(seller_zip_code_prefix as varchar)), '') as int) as seller_zip_code_prefix,
-    NULLIF(trim(cast(seller_city as varchar)), '') as seller_city,
-    NULLIF(trim(cast(seller_state as varchar)), '') as seller_state
+    nullif(trim(cast(seller_id as string)), '') as seller_id,
+    cast(nullif(trim(cast(seller_zip_code_prefix as string)), '') as int64) as seller_zip_code_prefix,
+    nullif(trim(cast(seller_city as string)), '') as seller_city,
+    nullif(trim(cast(seller_state as string)), '') as seller_state
+
 from raw_sellers
