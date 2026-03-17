@@ -1,8 +1,11 @@
-{% set src_name = var('source_name') %}
-{% set tbl_name = var('customers_table') %}
-
 with raw_customers as (
-    select * from {{ source(src_name, tbl_name) }}
+    select * from {{ source('raw_olist', 'customers') }}
 )
 
-select * from raw_customers
+select
+    NULLIF(trim(cast(customer_id as varchar)), '') as customer_id,
+    NULLIF(trim(cast(customer_unique_id as varchar)), '') as customer_unique_id,
+    cast(NULLIF(trim(cast(customer_zip_code_prefix as varchar)), '') as int) as customer_zip_code_prefix,
+    NULLIF(trim(cast(customer_city as varchar)), '') as customer_city,
+    NULLIF(trim(cast(customer_state as varchar)), '') as customer_state
+from raw_customers
