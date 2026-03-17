@@ -5,7 +5,7 @@
     {# If a custom schema is provided, prefix it to the target schema #}
     {%- if custom_schema_name is not none -%}
 
-        {{ custom_schema_name | trim }}_{{ default_schema | trim }}
+        {{ custom_schema_name | trim }}
 
     {%- else -%}
 
