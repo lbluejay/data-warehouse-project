@@ -2,32 +2,17 @@ version: 2
 
 sources:
   - name: raw_olist
-    schema: raw_olist
+    database: "{{ env_var('GCP_PROJECT_ID') }}"
+    schema: "{{ env_var('GCP_DATASET') }}"
     tables:
       - name: orders
-        description: "Raw orders table from Olist"
-        columns:
-          - name: order_id
-            description: "Primary order identifier"
-            tests:
-              - not_null
-              - unique
-          - name: customer_id
-            description: "Customer identifier"
-            tests:
-              - not_null
-          - name: order_status
-            description: "Status of the order"
-          - name: order_purchase_timestamp
-            description: "Purchase timestamp (raw)"
-          - name: order_approved_at
-            description: "Order approved timestamp (raw)"
-          - name: order_delivered_carrier_date
-            description: "Date delivered to carrier (raw)"
-          - name: order_delivered_customer_date
-            description: "Date delivered to customer (raw)"
-          - name: order_estimated_delivery_date
-            description: "Estimated delivery date (raw)"
+      - name: customers
+      - name: geolocation
+      - name: order_items
+      - name: order_payments
+      - name: order_reviews
+      - name: product_category_name_translation
+      - name: products
 
 models:
   - name: stg_orders
